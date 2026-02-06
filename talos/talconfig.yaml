@@ -4,10 +4,10 @@ clusterName: kubernetes
 talosVersion: "${talosVersion}"
 kubernetesVersion: "${kubernetesVersion}"
 
-endpoint: https://10.0.50.100:6443
+endpoint: https://10.0.0.200:6443
 additionalApiServerCertSans: &sans
   - "127.0.0.1"
-  - "10.0.50.100"
+  - "10.0.0.200"
 additionalMachineCertSans: *sans
 
 clusterPodNets: ["10.42.0.0/16"]
@@ -23,7 +23,8 @@ nodes:
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
+      # grubUseUKICmdline: false
+    talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -32,17 +33,18 @@ nodes:
         addresses:
           - "10.0.0.145/24"
         routes:
-          - gateway: "10.0.50.1"
+          - gateway: "10.0.0.1"
             network: 0.0.0.0/0
         mtu: 1500
         vip:
-          ip: "10.0.50.100"
+          ip: "10.0.0.200"
   - hostname: "esxi-2cu-8g-01"
     ipAddress: "10.0.0.146"
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
+      # grubUseUKICmdline: false
+    talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -51,17 +53,18 @@ nodes:
         addresses:
           - "10.0.0.146/24"
         routes:
-          - gateway: "10.0.50.1"
+          - gateway: "10.0.0.1"
             network: 0.0.0.0/0
         mtu: 1500
         vip:
-          ip: "10.0.50.100"
+          ip: "10.0.0.200"
   - hostname: "esxi-2cu-8g-03"
     ipAddress: "10.0.0.147"
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
+      # grubUseUKICmdline: false
+    talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -70,11 +73,11 @@ nodes:
         addresses:
           - "10.0.0.147/24"
         routes:
-          - gateway: "10.0.50.1"
+          - gateway: "10.0.0.1"
             network: 0.0.0.0/0
         mtu: 1500
         vip:
-          ip: "10.0.50.100"
+          ip: "10.0.0.200"
 
 # Global patches
 patches:
