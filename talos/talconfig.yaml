@@ -18,30 +18,9 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: "blade-cm4-001"
-    ipAddress: "10.0.50.7"
-    installDiskSelector:
-      serial: "0x0f750869"
-    machineSpec:
-      secureboot: false
-    talosImageURL: factory.talos.dev/installer/ee21ef4a5ef808a9b7484cc0dda0f25075021691c8c09a276591eedb638ea1f9
-    controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "dc:a6:32:a6:75:ba"
-        dhcp: false
-        addresses:
-          - "10.0.50.7/24"
-        routes:
-          - gateway: "10.0.50.1"
-            network: 0.0.0.0/0
-        mtu: 1500
-        vip:
-          ip: "10.0.50.100"
   - hostname: "esxi-2cu-8g-02"
     ipAddress: "10.0.0.145"
-    installDiskSelector:
-      serial: "Virtual disk"
+    installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
@@ -60,8 +39,7 @@ nodes:
           ip: "10.0.50.100"
   - hostname: "esxi-2cu-8g-01"
     ipAddress: "10.0.0.146"
-    installDiskSelector:
-      serial: "Virtual disk"
+    installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
@@ -72,6 +50,25 @@ nodes:
         dhcp: false
         addresses:
           - "10.0.0.146/24"
+        routes:
+          - gateway: "10.0.50.1"
+            network: 0.0.0.0/0
+        mtu: 1500
+        vip:
+          ip: "10.0.50.100"
+  - hostname: "esxi-2cu-8g-03"
+    ipAddress: "10.0.0.147"
+    installDisk: "/dev/sda"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "34:97:87:58:7b:02"
+        dhcp: false
+        addresses:
+          - "10.0.0.147/24"
         routes:
           - gateway: "10.0.50.1"
             network: 0.0.0.0/0

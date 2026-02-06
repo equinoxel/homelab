@@ -2,6 +2,5 @@ machine:
   network:
     disableSearchDomain: true
     nameservers:
-      - 10.0.0.1 # Local DNS from PiHole first
       - 1.1.1.1
       - 1.0.0.1
