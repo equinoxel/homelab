@@ -25,7 +25,7 @@ spec:
         url: "ssh://git@github.com/#{ repository_name }#.git"
         pullSecret: github-deploy-key
         #% else %#
-        url: "https://github.com/#{ repository_name }#.git"
+        url: "#{ repository_name if repository_name.startswith('https://') else 'https://github.com/' + repository_name + '.git' }#"
         #% endif %#
         ref: "refs/heads/#{ repository_branch }#"
         path: kubernetes/flux/cluster
