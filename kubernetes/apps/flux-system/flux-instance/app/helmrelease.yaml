@@ -21,7 +21,7 @@ spec:
         - notification-controller
       sync:
         kind: GitRepository
-        url: "https://git.laurivan.com/Dev/talos-cluster.git"
+        url: "https://github.com/dev/cluster.git"
         ref: "refs/heads/main"
         path: kubernetes/flux/cluster
       commonMetadata:
