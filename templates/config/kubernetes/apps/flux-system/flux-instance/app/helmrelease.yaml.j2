@@ -22,7 +22,11 @@ spec:
       sync:
         kind: GitRepository
         #% if repository_visibility == 'private' %#
+        #% if repository_name.startswith('https://') %#
+        url: "#{ repository_name.replace('https://', 'ssh://git@').replace('.git', '') }#.git"
+        #% else %#
         url: "ssh://git@github.com/#{ repository_name }#.git"
+        #% endif %#
         pullSecret: github-deploy-key
         #% else %#
         url: "#{ repository_name if repository_name.startswith('https://') else 'https://github.com/' + repository_name + '.git' }#"
