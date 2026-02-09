@@ -5,6 +5,6 @@ namespace: storage-system
 
 resources:
   - ./namespace.yaml
-  # - ./openebs
+  - ./openebs
   # - ./snapshot-controller
   # - ./volsync
