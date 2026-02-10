@@ -23,7 +23,7 @@ nodes:
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-      # grubUseUKICmdline: false
+      ## grubUseUKICmdline: false
     talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
@@ -43,7 +43,7 @@ nodes:
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-      # grubUseUKICmdline: false
+      ## grubUseUKICmdline: false
     talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
@@ -63,7 +63,7 @@ nodes:
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-      # grubUseUKICmdline: false
+      ## grubUseUKICmdline: false
     talosImageURL: factory.talos.dev/installer/43a1a6104d8dcd6547983f4ed13abb6f5e8a1b2fdad796c69e7db6e95d122884
     controlPlane: true
     networkInterfaces:
