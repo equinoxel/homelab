@@ -1,0 +1,45 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tuppr
+spec:
+  path: "./kubernetes/apps/system-upgrade/tuppr/app"
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: tuppr
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: tuppr
+      namespace: system-upgrade
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 1h
+  timeout: 5m
+
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tuppr-upgrades
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: tuppr
+  dependsOn:
+    - name: tuppr
+  interval: 1h
+  path: "./kubernetes/apps/system-upgrade/tuppr/upgrades"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  timeout: 5m
+  wait: false
