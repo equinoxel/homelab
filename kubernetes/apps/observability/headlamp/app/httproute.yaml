@@ -9,7 +9,7 @@ metadata:
   name: headlamp
 spec:
   hostnames:
-    - headlamp.kantai.xyz
+    - headlamp.internal.laurivan.com
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
