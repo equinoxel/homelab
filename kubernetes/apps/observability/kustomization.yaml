@@ -5,6 +5,6 @@ namespace: monitoring-system
 
 resources:
   - ./namespace.yaml
-  - ./headlamp/ks.yaml
+  - ./headlamp
   #- ./grafana
   #- ./kube-prometheus-stack
