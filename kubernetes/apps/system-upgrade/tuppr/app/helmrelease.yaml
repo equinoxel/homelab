@@ -8,5 +8,15 @@ spec:
     kind: OCIRepository
     name: tuppr
   interval: 30m
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: ServiceAccount
+              name: tuppr-talosconfig
+            patch: |
+              - op: replace
+                path: /apiVersion
+                value: v1
   values:
     replicaCount: 2
