@@ -44,14 +44,3 @@ spec:
       - name: headlamp-plugins
         emptyDir:
           sizeLimit: 100Mi
-    route:
-      app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: 80
