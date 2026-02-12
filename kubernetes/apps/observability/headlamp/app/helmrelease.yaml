@@ -30,13 +30,6 @@ spec:
         volumeMounts:
           - mountPath: /headlamp/plugins
             name: headlamp-plugins
-    config:
-      oidc:
-        secret:
-          create: false
-        externalSecret:
-          enabled: true
-          name: headlamp-oidc
     env:
       - name: HEADLAMP_CONFIG_TRACING_ENABLED
         value: "false"
