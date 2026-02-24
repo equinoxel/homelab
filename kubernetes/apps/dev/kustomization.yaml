@@ -1,10 +1,8 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: observability
+namespace: dev
 
 resources:
   - ./namespace.yaml
-  - ./headlamp
-  #- ./grafana
-  #- ./kube-prometheus-stack
+  # TODO: - ./atuin  - enable it when the storage is set up
