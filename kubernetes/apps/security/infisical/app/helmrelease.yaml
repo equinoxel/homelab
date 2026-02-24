@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: infisical
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: infisical
+  driftDetection:
+    mode: enabled
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  valuesFrom:
+    - kind: Secret
+      name: infisical-secret
+      valuesKey: encryptionKey
+      targetPath: infisical.encryptionKey
+    - kind: Secret
+      name: infisical-secret
+      valuesKey: authSecret
+      targetPath: infisical.authSecret
+    - kind: Secret
+      name: infisical-secret
+      valuesKey: dbPassword
+      targetPath: postgresql.auth.password
+  values:
+    fullnameOverride: infisical
+    infisical:
+      enabled: true
+      name: infisical
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
+    frontend:
+      enabled: true
+      name: infisical-frontend
+      image:
+        repository: infisical/frontend
+        tag: v0.112.0
+        pullPolicy: IfNotPresent
+      service:
+        type: ClusterIP
+        port: 80
+    backend:
+      enabled: true
+      name: infisical-backend
+      image:
+        repository: infisical/backend
+        tag: v0.112.0
+        pullPolicy: IfNotPresent
+      service:
+        type: ClusterIP
+        port: 4000
+    postgresql:
+      enabled: true
+      auth:
+        username: infisical
+        database: infisical
+    redis:
+      enabled: true
+      auth:
+        enabled: false
