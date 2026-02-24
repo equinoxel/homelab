@@ -17,5 +17,5 @@ spec:
       namespace: network
   rules:
     - backendRefs:
-        - name: infisical-frontend
-          port: 80
+        - name: infisical-backend
+          port: 8080

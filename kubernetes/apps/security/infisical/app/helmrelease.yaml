@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: infisical
-      version: 0.10.2
+      version: 0.4.2
       sourceRef:
         kind: HelmRepository
         name: infisical
@@ -23,51 +23,31 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  # Map existing secret keys to the new chart's backendEnvironmentVariables paths.
+  # The old chart used infisical.encryptionKey / infisical.authSecret;
+  # the new chart (0.4.x) uses backendEnvironmentVariables.ENCRYPTION_KEY / AUTH_SECRET.
   valuesFrom:
     - kind: Secret
       name: infisical-secret
       valuesKey: encryptionKey
-      targetPath: infisical.encryptionKey
+      targetPath: backendEnvironmentVariables.ENCRYPTION_KEY
     - kind: Secret
       name: infisical-secret
       valuesKey: authSecret
-      targetPath: infisical.authSecret
-    - kind: Secret
-      name: infisical-secret
-      valuesKey: dbPassword
-      targetPath: postgresql.auth.password
+      targetPath: backendEnvironmentVariables.JWT_AUTH_SECRET
   values:
     fullnameOverride: *name
-    infisical:
-      enabled: true
-      name: *name
-      podAnnotations:
-        reloader.stakater.com/auto: "true"
-    frontend:
-      enabled: true
-      name: infisical-frontend
-      image:
-        repository: infisical/frontend
-        tag: v0.112.0
-        pullPolicy: IfNotPresent
-      service:
-        type: ClusterIP
-        port: 80
     backend:
       enabled: true
-      name: infisical-backend
-      image:
-        repository: infisical/backend
-        tag: v0.112.0
-        pullPolicy: IfNotPresent
-      service:
-        type: ClusterIP
-        port: 4000
-    postgresql:
+      replicaCount: 1
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
+    backendEnvironmentVariables:
+      SITE_URL: https://infisical.laurivan.com
+    mongodb:
       enabled: true
       auth:
-        username: *name
-        database: *name
+        enabled: false
     redis:
       enabled: true
       auth:
