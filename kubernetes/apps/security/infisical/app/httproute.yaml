@@ -9,7 +9,7 @@ metadata:
   name: infisical
 spec:
   hostnames:
-    - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+    - infisical.laurivan.com
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
