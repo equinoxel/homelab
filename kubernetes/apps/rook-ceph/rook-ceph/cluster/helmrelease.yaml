@@ -31,9 +31,53 @@ spec:
         connections:
           requireMsgr2: true
       resources:
-        osd:
+        mon:
+          requests:
+            cpu: 200m
+            memory: 256Mi
           limits:
-            memory: 8Gi # Required for bootstrap
+            memory: 1Gi
+        mgr:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            memory: 1Gi
+        mds:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            memory: 2Gi
+        osd:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            memory: 4Gi
+        prepareosd:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        crashcollector:
+          requests:
+            cpu: 15m
+            memory: 60Mi
+          limits:
+            memory: 60Mi
+        exporter:
+          requests:
+            cpu: 15m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        mgr-sidecar:
+          requests:
+            cpu: 50m
+            memory: 40Mi
+          limits:
+            memory: 100Mi
       storage:
         devicePathFilter: /dev/disk/by-path/pci-0000:00:10.0-scsi-0:0:6:0
         useAllDevices: false
