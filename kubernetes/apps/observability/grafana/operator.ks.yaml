@@ -4,12 +4,12 @@ kind: Kustomization
 metadata:
   name: grafana-operator
 spec:
-  path: ./kubernetes/apps/monitoring-system/grafana/operator
+  path: ./kubernetes/apps/observability/grafana/operator
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: monitoring-system
-  interval: 10m
+  targetNamespace: observability
+  interval: 1h
   prune: true
   wait: true
