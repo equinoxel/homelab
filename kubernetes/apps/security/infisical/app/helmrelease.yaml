@@ -3,12 +3,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: infisical
+  name: &name infisical
 spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: infisical
+    name: *name
   driftDetection:
     mode: enabled
   install:
@@ -32,10 +32,10 @@ spec:
       valuesKey: dbPassword
       targetPath: postgresql.auth.password
   values:
-    fullnameOverride: infisical
+    fullnameOverride: *name
     infisical:
       enabled: true
-      name: infisical
+      name: *name
       podAnnotations:
         reloader.stakater.com/auto: "true"
     frontend:
@@ -61,8 +61,8 @@ spec:
     postgresql:
       enabled: true
       auth:
-        username: infisical
-        database: infisical
+        username: *name
+        database: *name
     redis:
       enabled: true
       auth:
