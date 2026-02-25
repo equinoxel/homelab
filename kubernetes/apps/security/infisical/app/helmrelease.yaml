@@ -35,10 +35,7 @@ spec:
       name: infisical-secret
       valuesKey: authSecret
       targetPath: backendEnvironmentVariables.JWT_AUTH_SECRET
-    - kind: Secret
-      name: infisical-db-pguser-infisical
-      valuesKey: uri
-      targetPath: backendEnvironmentVariables.DB_CONNECTION_URI
+
   values:
     fullnameOverride: *name
     backend:
