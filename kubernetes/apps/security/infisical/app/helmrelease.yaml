@@ -35,6 +35,10 @@ spec:
       name: infisical-secret
       valuesKey: authSecret
       targetPath: backendEnvironmentVariables.JWT_AUTH_SECRET
+    - kind: Secret
+      name: infisical-db-pguser-infisical
+      valuesKey: uri
+      targetPath: backendEnvironmentVariables.DB_CONNECTION_URI
   values:
     fullnameOverride: *name
     backend:
@@ -46,9 +50,17 @@ spec:
       SITE_URL: https://infisical.laurivan.com
     mongodb:
       enabled: true
+      image:
+        registry: docker.io
+        repository: bitnami/mongodb
+        tag: "6.0"
       auth:
         enabled: false
     redis:
       enabled: true
+      image:
+        registry: docker.io
+        repository: bitnami/redis
+        tag: "7.0"
       auth:
         enabled: false
