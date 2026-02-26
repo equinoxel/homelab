@@ -47,8 +47,6 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: [ALL] }
             resources:
-              claims:
-                - name: gpu
               requests:
                 cpu: 1
                 memory: 2Gi
@@ -61,11 +59,6 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-      nodeSelector:
-        cpu: i5-9500T
-      resourceClaims:
-        - name: gpu
-          resourceClaimTemplateName: *app
     service:
       app:
         type: LoadBalancer
