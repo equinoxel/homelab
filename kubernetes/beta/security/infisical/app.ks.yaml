@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/security/infisical/app
+  path: ./kubernetes/beta/security/infisical/app
   prune: true
   sourceRef:
     kind: GitRepository

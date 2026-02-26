@@ -5,8 +5,6 @@ namespace: security
 
 resources:
   - ./namespace.yaml
-  - ./infisical
-
 # External secrets should be implemented.
 # Most popular is 1password, but it's paid
 # https://github.com/tholinka/home-ops implements secrets via bitwarden (which is free)
