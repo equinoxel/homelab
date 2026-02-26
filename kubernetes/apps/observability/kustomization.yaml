@@ -6,5 +6,7 @@ namespace: observability
 resources:
   - ./namespace.yaml
   - ./headlamp
-  #- ./grafana
+  - ./grafana
   #- ./kube-prometheus-stack
+components:
+  - ../../components/repos/app-template

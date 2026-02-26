@@ -1,0 +1,14 @@
+---
+version: "3"
+
+tasks:
+  routes:
+    desc: List known routes in envoy gateway
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - kubectl get httproute -A
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - test -f {{.ROOT_DIR}}/.sops.yaml
+      - test -f {{.SCRIPTS_DIR}}/bootstrap-apps.sh
+      - test -f {{.SOPS_AGE_KEY_FILE}}
