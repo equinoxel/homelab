@@ -11,3 +11,6 @@ resources:
   - ./plex
   #- ./karakeep
   - ./navidrome
+
+components:
+  - ../../components/reops/app-template
