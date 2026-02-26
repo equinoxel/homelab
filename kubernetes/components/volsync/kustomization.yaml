@@ -7,4 +7,4 @@ resources:
   - replication-source.yaml
   - replication-destination.yaml
   - pvc.yaml
-  - secret.sops.yaml
+  - secrets.sops.yaml
