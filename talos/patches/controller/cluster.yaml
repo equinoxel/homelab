@@ -42,9 +42,9 @@ cluster:
               resources: ["endpoints"]
             - group: "discovery.k8s.io"
               resources: ["endpointslices"]
-        # Log everything else at Metadata level (headers only, no request body).
+        # Don't log anything else by default to reduce CPU load.
         # This covers all auth, RBAC, resource mutations, etc.
-        - level: Metadata
+        - level: None
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
