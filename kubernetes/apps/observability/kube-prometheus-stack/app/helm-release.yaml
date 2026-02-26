@@ -10,7 +10,7 @@ spec:
     name: kube-prometheus-stack
 
   values:
-    crds: {enabled: true}
+    crds: { enabled: true }
     cleanPrometheusOperatorObjectNames: true
 
     # ==========================================================================
@@ -48,7 +48,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: openebs-hostpath
+              storageClassName: openebs-zfs
               resources:
                 requests:
                   storage: 1Gi
@@ -141,11 +141,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: openebs-hostpath
+              storageClassName: openebs-zfs
               resources:
                 requests:
                   storage: 50Gi
-
 
     # ==========================================================================
     # Grafana
@@ -162,19 +161,19 @@ spec:
     # ==========================================================================
     # Exporters
     # ==========================================================================
-    coreDns: {enabled: true}
-    kubelet: {enabled: true}
-    kubeApiServer: {enabled: true}
-    kubeControllerManager: {enabled: true}
-    kubeScheduler: {enabled: true}
-    kubeProxy: {enabled: true}
+    coreDns: { enabled: true }
+    kubelet: { enabled: true }
+    kubeApiServer: { enabled: true }
+    kubeControllerManager: { enabled: true }
+    kubeScheduler: { enabled: true }
+    kubeProxy: { enabled: true }
     kubeEtcd:
       enabled: true
       service:
         selector:
           component: kube-apiserver
 
-    nodeExporter: {enabled: true}
+    nodeExporter: { enabled: true }
     prometheus-node-exporter:
       resources:
         requests:
@@ -183,7 +182,7 @@ spec:
         limits:
           memory: 64Mi
 
-    kubeStateMetrics: {enabled: true}
+    kubeStateMetrics: { enabled: true }
     kube-state-metrics:
       resources:
         requests:

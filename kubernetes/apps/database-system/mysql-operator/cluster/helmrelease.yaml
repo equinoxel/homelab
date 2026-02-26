@@ -26,7 +26,7 @@ spec:
         enabled: false
         secretName:
     datadirVolumeClaimTemplate:
-      storageClassName: openebs-hostpath
+      storageClassName: openebs-zfs
       accessModes: ReadWriteOnce
       resources:
         requests:
@@ -132,7 +132,6 @@ spec:
     #      sink:
     ##       rawConfig:
 
-
     #keyring:
     #  file:
     #    fileName:
@@ -158,7 +157,6 @@ spec:
     #      vaults: "vaults.<region>.oci.oraclecloud.com"
     #      secrets: "secrets.vaults.<region>.oci.oraclecloud.com"
 
-
     #podSpec:
     #  containers:
     #  - name: mysql
@@ -178,7 +176,6 @@ spec:
     #    [mysqld]
     #    core_file
     #    local_infile=off
-
 
     #datadirVolumeClaimTemplate:
     #  accessModes:
@@ -211,7 +208,6 @@ spec:
     #    donorUrl:
     #    rootUser:
     #    credentials:
-
 
     #backupProfiles:
     #- name: dump-instance-profile-pvc
@@ -270,7 +266,6 @@ spec:
     #          prefix : /
     #          bucketName: idbcluster_backup
     #          credentials: oci-credentials
-
 
     # If you would like to debug the Helm output with `helm template`, you need
     # to turn disableLookups on as during `helm template` Helm won't contact the kube API
