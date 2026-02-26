@@ -10,11 +10,11 @@ spec:
   components:
     - ../../../../components/volsync
     # - ../../../../components/keda/nfs-scaler
-  dependsOn:
+  dependsOn: [] # TODO: Add storage-ready back when we have a better way to handle it
     # - name: keda
     #   namespace: observability
-    - name: storage-ready
-      namespace: flux-system
+    # - name: storage-ready
+    #  namespace: flux-system
   path: ./kubernetes/apps/media/plex/app
   postBuild:
     substitute:
