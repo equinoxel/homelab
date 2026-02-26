@@ -10,7 +10,7 @@ spec:
   timeout: 15m
   targetNamespace: media
 
-  path: ./apps/media/navidrome/app
+  path: ./kubernetes/apps/media/navidrome/app
   components:
     - ../../../../components/volsync/
   sourceRef:
