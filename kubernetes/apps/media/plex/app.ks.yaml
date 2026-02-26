@@ -20,8 +20,6 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 50Gi
-      VOLSYNC_STORAGECLASS: ceph-block
-      VOLSYNC_CACHE_SNAPSHOTCLASS: ceph-block
   prune: true
   sourceRef:
     kind: GitRepository

@@ -24,8 +24,6 @@ spec:
       VOLSYNC_CAPACITY: 1Gi
       VOLSYNC_PUID: "568"
       VOLSYNC_PGID: "568"
-      VOLSYNC_STORAGECLASS: ceph-block
-      VOLSYNC_CACHE_SNAPSHOTCLASS: ceph-block
 
   decryption: { provider: sops }
   dependsOn:
