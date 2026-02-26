@@ -15,7 +15,7 @@ spec:
   #     name: *app
   #     namespace: *namespace
   interval: 30m
-  path: ./kubernetes/apps/database/mysql-operator/app
+  path: ./kubernetes/apps/database-system/mysql-operator/app
   prune: true
   retryInterval: 1m
   sourceRef:
@@ -32,7 +32,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app mysql-innodbcluster
-  namespace: &namespace database
+  namespace: &namespace database-system
 spec:
   commonMetadata:
     labels:
