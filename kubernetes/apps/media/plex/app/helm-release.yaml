@@ -17,19 +17,6 @@ spec:
       *app :
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-config:
-            image:
-              repository: busybox
-              tag: latest
-            command:
-              [
-                "sh",
-                "-c",
-                "mkdir -p '/config/Library/Application Support/Plex Media Server' && chown -R 1000:1000 '/config/Library/Application Support/Plex Media Server'",
-              ]
-            securityContext:
-              runAsUser: 1000
         containers:
           app:
             image:
@@ -110,11 +97,10 @@ spec:
       config-cache:
         existingClaim: "{{ .Release.Name }}-cache"
         globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Cache
+          - path: /cache
       tmpfs:
         type: emptyDir
         globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Logs
           - path: /tmp
       media:
         type: nfs
