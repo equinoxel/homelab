@@ -11,6 +11,7 @@ resources:
   - ./plex
   #- ./karakeep
   - ./navidrome
+  - ./kavita
 
 components:
   - ../../components/repos/app-template
