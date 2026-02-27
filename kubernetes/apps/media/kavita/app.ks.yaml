@@ -15,7 +15,7 @@ spec:
       namespace: observability
     - name: storage-ready
       namespace: flux-system
-  path: ./kubernetes/apps/media/kavita
+  path: ./kubernetes/apps/media/kavita/app
   postBuild:
     substitute:
       APP: *app
