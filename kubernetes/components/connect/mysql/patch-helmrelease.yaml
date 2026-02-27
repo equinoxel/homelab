@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: placeholder
+spec:
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              DB_HOST: mysql-innodbcluster-router.database-system.svc.cluster.local
+              DB_PORT: "3306"
+              DB_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: mysql-secret
+                    key: DB_USER
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: mysql-secret
+                    key: DB_PASSWORD
+              DB_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: mysql-secret
+                    key: DB_NAME
