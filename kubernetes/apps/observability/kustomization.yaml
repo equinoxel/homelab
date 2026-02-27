@@ -13,3 +13,4 @@ resources:
   - ./grafana
   - ./victoria-logs
   - ./kube-prometheus-stack
+  - ./keda
