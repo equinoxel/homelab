@@ -20,7 +20,7 @@ spec:
               repository: ghcr.io/home-operations/tautulli
               tag: 2.16.1@sha256:6983eea603ee230b189f2d32e7d7fc0bb94917df735a71ba20460c4991877645
             env:
-              TAUTULLI_HTTP_BASE_URL: https://tautulli.tholinka.dev
+              TAUTULLI_HTTP_BASE_URL: https://tautulli.laurivan.com
               TAUTULLI_HTTP_PORT: &port 80
             envFrom:
               - secretRef:

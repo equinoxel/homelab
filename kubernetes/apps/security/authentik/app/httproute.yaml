@@ -5,7 +5,7 @@ kind: HTTPRoute
 metadata:
   name: authentik
   annotations:
-    gethomepage.dev/enabled: 'true'
+    gethomepage.dev/enabled: "true"
     gethomepage.dev/icon: authentik.png
     gethomepage.dev/name: Authentik
     gethomepage.dev/group: Infrastructure
@@ -13,10 +13,10 @@ metadata:
     #gethomepage.dev/description: OIDC User Management
     gethomepage.dev/widget.type: authentik
     gethomepage.dev/widget.url: http://authentik-server.security.svc.cluster.local
-    gethomepage.dev/widget.key: '{{HOMEPAGE_VAR_AUTHENTIK_TOKEN}}'
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_AUTHENTIK_TOKEN}}"
 spec:
   hostnames:
-    - auth.tholinka.dev
+    - auth.laurivan.com
   parentRefs:
     - name: envoy-external
       namespace: network

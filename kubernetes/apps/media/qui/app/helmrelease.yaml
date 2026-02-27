@@ -29,8 +29,8 @@ spec:
 
               # oidc - make it true later
               QUI__OIDC_ENABLED: false
-              # QUI__OIDC_ISSUER: https://auth.tholinka.dev/application/o/qui/
-              # QUI__OIDC_REDIRECT_URL: https://qui.tholinka.dev/api/auth/oidc/callback
+              # QUI__OIDC_ISSUER: https://auth.laurivan.com/application/o/qui/
+              # QUI__OIDC_REDIRECT_URL: https://qui.laurivan.com/api/auth/oidc/callback
               # QUI__OIDC_DISABLE_BUILT_IN_LOGIN: true
             envFrom:
               - secretRef:
