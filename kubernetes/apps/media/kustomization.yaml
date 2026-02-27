@@ -13,4 +13,4 @@ resources:
   - ./navidrome
 
 components:
-  - ../../components/reops/app-template
+  - ../../components/repos/app-template
