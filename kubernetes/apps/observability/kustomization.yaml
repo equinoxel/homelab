@@ -11,4 +11,5 @@ resources:
   - ./namespace.yaml
   - ./headlamp
   - ./grafana
-  #- ./kube-prometheus-stack
+  - ./victoria-logs
+  - ./kube-prometheus-stack
