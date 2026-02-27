@@ -33,6 +33,11 @@ spec:
                 value:
                   name: home-nonroot
                   mountPath: /home/nonroot
+              - op: add
+                path: /spec/template/spec/containers/0/env/-
+                value:
+                  name: TALOSCONFIG
+                  value: /var/run/secrets/talos.dev/talosconfig
   values:
     replicaCount: 2
     monitoring:
