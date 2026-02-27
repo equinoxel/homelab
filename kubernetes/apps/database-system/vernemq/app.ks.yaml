@@ -7,8 +7,9 @@ metadata:
   namespace: &namespace database-system
 spec:
   interval: 1h
-  components:
-    - ../../../../components/ext-auth
+  # Add it later
+  # components:
+  #  - ../../../../components/ext-auth
   path: ./kubernetes/apps/database-system/vernemq/app
   prune: true
   dependsOn:
