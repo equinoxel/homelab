@@ -32,6 +32,11 @@ spec:
                 enabled: true
               readiness:
                 enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -60,6 +65,10 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /kavita/config
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
       media:
         type: nfs
         server: 10.0.0.14
