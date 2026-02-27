@@ -7,4 +7,4 @@ components:
   - ../../components/repos/app-template
 resources:
   - ./namespace.yaml
-  - ./tuppr/ks.yaml
+  # - ./tuppr/ks.yaml
