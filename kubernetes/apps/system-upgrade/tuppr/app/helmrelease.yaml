@@ -9,6 +9,16 @@ spec:
   chartRef:
     kind: OCIRepository
     name: *app
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: ServiceAccount
+              name: tuppr-talosconfig
+            patch: |
+              - op: replace
+                path: /apiVersion
+                value: v1
   values:
     replicaCount: 2
     monitoring:
