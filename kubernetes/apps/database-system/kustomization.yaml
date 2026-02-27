@@ -7,5 +7,4 @@ resources:
   - ./namespace.yaml
   - ./crunchy-postgres-operator
   - ./mysql-operator
-  # - ./dragonfly-operator
-  # - ./rabbitmq-operator
+  - ./vernemq
