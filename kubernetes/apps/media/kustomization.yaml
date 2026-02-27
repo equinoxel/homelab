@@ -12,6 +12,7 @@ resources:
   #- ./karakeep
   - ./navidrome
   - ./kavita
+  - ./tautulli
 
 components:
   - ../../components/repos/app-template
