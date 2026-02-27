@@ -23,7 +23,7 @@ spec:
               repository: ghcr.io/home-operations/plex
               tag: 1.43.0.10467@sha256:fa62165df48d04e9a418805951e903f831dec0e0601f4dc4245f9948d7fd719b
             env:
-              PLEX_CLAIM: claim-uezw1yb6WFyhnnNaLnaf
+              PLEX_CLAIM: claim-zoesEect2FzU9yjymhET
               PLEX_SERVER_NAME: "My Awesome Collection"
               PLEX_ADVERTISE_URL: https://plex.laurivan.com:443,http://plex.servers.internal:32400,http://plex.media.svc.cluster.local:32400
             probes:
