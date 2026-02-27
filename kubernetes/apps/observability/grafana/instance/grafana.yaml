@@ -9,43 +9,43 @@ metadata:
 spec:
   config:
     analytics:
-      check_for_updates: 'false'
-      check_for_plugin_updates: 'false'
-      feedback_links_enabled: 'false'
-      reporting_enabled: 'false'
+      check_for_updates: "false"
+      check_for_plugin_updates: "false"
+      feedback_links_enabled: "false"
+      reporting_enabled: "false"
     auth:
-      disable_login_form: 'false'
-      signout_redirect_url: https://auth.tholinka.dev/application/o/grafana/end-session/
-      oauth_auto_login: 'true'
-      oauth_allow_insecure_email_lookup: 'true'
+      disable_login_form: "false"
+      signout_redirect_url: https://auth.laurivan.com/application/o/grafana/end-session/
+      oauth_auto_login: "true"
+      oauth_allow_insecure_email_lookup: "true"
     auth.anonymous:
-      enabled: 'true'
-      org_id: '1'
+      enabled: "true"
+      org_id: "1"
       org_name: Main Org.
       org_role: Viewer
-      hide_version: 'true'
+      hide_version: "true"
     auth.generic_oauth:
       name: authentik
-      enabled: 'true'
+      enabled: "true"
       scopes: openid email profile
-      auth_url: https://auth.tholinka.dev/application/o/authorize/
-      token_url: https://auth.tholinka.dev/application/o/token/
-      api_url: https://auth.tholinka.dev/application/o/userinfo/
+      auth_url: https://auth.laurivan.com/application/o/authorize/
+      token_url: https://auth.laurivan.com/application/o/token/
+      api_url: https://auth.laurivan.com/application/o/userinfo/
       # Optionally map user groups to Grafana roles
       role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
     log:
       mode: console
     metrics:
-      enabled: 'true'
+      enabled: "true"
     news:
-      news_feed_enabled: 'false'
+      news_feed_enabled: "false"
     plugins:
-      plugin_admin_enabled: 'false'
+      plugin_admin_enabled: "false"
     security:
-      angular_support_enabled: 'true'
+      angular_support_enabled: "true"
     server:
-      enable_gzip: 'true'
-      root_url: https://grafana.tholinka.dev
+      enable_gzip: "true"
+      root_url: https://grafana.laurivan.com
   deployment:
     spec:
       strategy:
@@ -71,13 +71,13 @@ spec:
                       name: *secret
                       key: *adminPass
                 - name: GF_DATE_FORMATS_USE_BROWSER_LOCALE
-                  value: 'true'
+                  value: "true"
                 - name: GF_SECURITY_COOKIE_SAMESITE
                   value: grafana
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
-                capabilities: { drop: ['ALL'] }
+                capabilities: { drop: ["ALL"] }
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000
@@ -91,7 +91,7 @@ spec:
   httpRoute:
     metadata:
       annotations:
-        gethomepage.dev/enabled: 'true'
+        gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Observability
         gethomepage.dev/name: Grafana
         gethomepage.dev/icon: grafana.svg
