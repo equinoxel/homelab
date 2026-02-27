@@ -21,6 +21,6 @@ spec:
   targetNamespace: *namespace
   dependsOn:
     - name: postgres-cluster
-      namespace: database
+      namespace: database-system
     - name: openebs
       namespace: openebs-system
