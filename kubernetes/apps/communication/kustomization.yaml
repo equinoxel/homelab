@@ -7,6 +7,6 @@ components:
   - ../../components/sops
   - ../../components/repos/app-template
 
-resources: []
-  #- ./namespace.yaml
+resources:
+  - ./namespace.yaml
   #- ./publish-k8s-schemas
