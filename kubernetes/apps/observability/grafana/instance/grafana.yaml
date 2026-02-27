@@ -98,7 +98,7 @@ spec:
         gethomepage.dev/pod-selector: app=grafana
     spec:
       hostnames:
-        - grafana.tholinka.dev
+        - grafana.laurivan.com
       parentRefs:
         - name: envoy-internal
           namespace: network
