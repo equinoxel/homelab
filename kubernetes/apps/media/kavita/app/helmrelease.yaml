@@ -39,14 +39,14 @@ spec:
                   periodSeconds: 10
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
-        fsGroup: 1005
+        fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
-        runAsUser: 1003
+        runAsUser: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
