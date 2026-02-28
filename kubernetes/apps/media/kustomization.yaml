@@ -11,7 +11,7 @@ resources:
   - ./plex
   #- ./karakeep
   - ./navidrome
-  - ./kavita
+  # - ./kavita
   - ./tautulli
 
 components:
