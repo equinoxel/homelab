@@ -60,7 +60,7 @@ spec:
       - name: mysql-backup-pvc-schedule
         schedule: "0 1 * * *"
         backupProfileName: mysql-db-backup
-        enabled: true
+        enabled: false
 
     #instanceService:
     #  annotations:
