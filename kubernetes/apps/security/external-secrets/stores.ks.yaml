@@ -16,10 +16,6 @@ spec:
     name: flux-system
     namespace: flux-system
   targetNamespace: *namespace
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
   postBuild:
     substituteFrom:
       - kind: Secret
