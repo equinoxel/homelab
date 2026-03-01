@@ -38,21 +38,27 @@ graph TD
 
 ## Prerequisites
 
-Before this Kustomization can successfully apply and become healthy, certain manual prerequisites must be met.
+Before this Kustomization can successfully apply and become healthy, certain manual prerequisites must be met in both Bitwarden Secrets Manager and your SOPS secrets.
 
-The `ClusterSecretStore` and the Flux Kustomization rely on a pre-existing Kubernetes Secret containing the necessary authentication details for Bitwarden Secrets Manager.
+### 1. Bitwarden Secrets Manager Setup
 
-### 1. Create the Bitwarden Secret
+1. **Create a Project:** In the Bitwarden Secrets Manager web vault, create a project (e.g., `bitwarden`). Note the Project ID (UUID) from the URL or project settings.
+2. **Create a Machine Account:** Create a machine account (e.g., `kubernetes-eso`).
+3. **Grant Project Access:** Under the Machine Account's **Projects** tab, add your newly created project and grant it **Read** access. *(If you skip this step, ESO will silently receive empty lists and fail to find secrets!)*
+4. **Generate an Access Token:** Generate an Access Token for the machine account. This will be your `BITWARDEN_MACHINE_KEY`.
+5. **Retrieve IDs:** Get your Organization ID from the vault and the Project ID for the project you created.
 
-You must create a SOPS-encrypted Secret or a manual Opaque Secret named `bitwarden` in the `security` namespace.
+### 2. Create the SOPS-Encrypted Kubernetes Secret
 
-This secret **must** contain the following keys:
+You must create a SOPS-encrypted Secret (e.g., `secrets.sops.yaml` in the `stores/` directory) that will be deployed as `bitwarden` in the `security` namespace.
 
-1. `BITWARDEN_MACHINE_KEY`: The access token/machine key generated from the Bitwarden Secrets Manager web vault.
-2. `BITWARDEN_ORGANIZATION_ID`: The UUID of your Bitwarden organization.
-3. `BITWARDEN_PROJECT_ID`: The UUID of the specific Bitwarden project ESO should have access to.
+This secret **must** contain the following exact keys:
 
-**Example Secret Manifest (needs to be SOPS encrypted or applied manually):**
+1. `BITWARDEN_MACHINE_KEY`: The access token generated from the BWS machine account.
+2. `BITWARDEN_ORGANIZATION_ID`: The full 36-character UUID of your Bitwarden organization.
+3. `BITWARDEN_PROJECT_ID`: The full 36-character UUID of the specific Bitwarden project.
+
+**Example unencrypted SOPS Secret Manifest:**
 
 ```yaml
 apiVersion: v1
@@ -69,40 +75,87 @@ stringData:
 
 > **Note:** Flux uses `postBuild.substituteFrom` to inject the Organization ID and Project ID directly into the `ClusterSecretStore` manifest upon reconciliation, while the `BITWARDEN_MACHINE_KEY` is referenced natively by the store.
 
-### 2. Certificate Generation
+### 3. Certificate Generation
 
-The Bitwarden SDK server requires mutual TLS or secure communication. The `app.ks.yaml` expects a cert-manager `Certificate` named `bitwarden-tls-certs` to be created (which in turn generates a secret containing a `ca.crt`). Ensure your PKI/Issuer is correctly configured to fulfill this certificate request.
+The Bitwarden SDK server requires mutual TLS or secure communication. The `app.ks.yaml` expects a cert-manager `Certificate` named `bitwarden-tls-certs` to be created. In this setup, a `SelfSigned` issuer named `bitwarden-selfsigned-issuer` automatically bootstraps this certificate.
 
-## Usage
+## Testing External Secrets
 
-To use this store in your applications, create an `ExternalSecret` resource in the application's namespace and reference the `ClusterSecretStore` named `bitwarden`.
+To verify that External Secrets is correctly authenticating to Bitwarden and can fetch secrets:
 
-**Example:**
+### 1. Create a Test Secret in Bitwarden
+
+In your BWS project (e.g., `bitwarden`), create a new Secret.
+- **Name:** `bitwarden-test`
+- **Value:** Store any simple text or JSON value, for example:
+  ```json
+  {
+    "TEST_KEY": "Hello World"
+  }
+  ```
+
+### 2. Apply a Test ExternalSecret
+
+Create and apply a file named `external-secret-test.yaml`:
+
+```yaml
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: bitwarden-test
+  namespace: security
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden
+  target:
+    name: bitwarden-test-secret # The native Kubernetes Secret to be created
+  dataFrom:
+    - extract:
+        key: bitwarden-test # The name of the secret in Bitwarden
+```
+
+Apply it to the cluster:
+```shell
+kubectl apply -f external-secret-test.yaml
+```
+
+### 3. Validate Synchronization
+
+Check that the ExternalSecret synced successfully:
+```shell
+kubectl get externalsecret -n security bitwarden-test
+```
+You should see status `True` and `Reason: SecretSynced`.
+
+Check that the native Kubernetes Secret was created and contains the mapped keys:
+```shell
+kubectl get secret -n security bitwarden-test-secret -o json | jq '.data | keys'
+```
+This should output your extracted keys:
+```json
+[
+  "TEST_KEY"
+]
+```
+
+## Advanced Usage (Templating)
+
+You can use templating to map individual fields or generate complex configuration files from Bitwarden secrets:
 
 ```yaml
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: my-app-secret
+  namespace: default
 spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
     name: bitwarden
   target:
-    name: my-app-secret # The name of the Kubernetes Secret to be created
-    creationPolicy: Owner
-  dataFrom:
-    - extract:
-        key: my_bws_secret_identifier # The name of the secret in Bitwarden Secrets Manager
-```
-
-### Advanced Usages (Templating)
-
-You can also use templating to map individual fields or generate complex configuration files from Bitwarden secrets, as demonstrated in the PgAdmin deployment:
-
-```yaml
-  target:
+    name: my-app-secret
     template:
       data:
         config.json: |
