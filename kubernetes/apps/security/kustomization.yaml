@@ -11,5 +11,5 @@ resources:
 # Most popular is 1password, but it's paid
 # https://github.com/tholinka/home-ops implements secrets via bitwarden (which is free)
 
-components: []
-  # - ../../components/common
+components:
+  - ../../components/common
