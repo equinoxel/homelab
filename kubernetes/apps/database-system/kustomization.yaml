@@ -4,10 +4,10 @@ kind: Kustomization
 namespace: database-system
 
 components:
-  # - ../../components/common
+  - ../../components/common
   - ../../components/repos/app-template
 resources:
   - ./namespace.yaml
-  # - ./crunchy-postgres-operator
   - ./mysql-operator
   - ./vernemq
+  - ./cnpg
