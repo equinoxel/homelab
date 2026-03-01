@@ -1,4 +1,12 @@
 ---
+# yaml-language-server: $schema=https://schemas.tholinka.dev/cert-manager.io/issuer_v1.json
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: bitwarden-selfsigned-issuer
+spec:
+  selfSigned: {}
+---
 # yaml-language-server: $schema=https://schemas.tholinka.dev/cert-manager.io/certificate_v1.json
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -20,6 +28,6 @@ spec:
   duration: 168h # 7d
   renewBefore: 49h # 2d + a bit
   issuerRef:
-    name: cluster-signed-issuer
-    kind: ClusterIssuer
+    name: bitwarden-selfsigned-issuer
+    kind: Issuer
     group: cert-manager.io
