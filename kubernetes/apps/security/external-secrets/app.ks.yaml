@@ -14,25 +14,3 @@ spec:
     name: flux-system
     namespace: flux-system
   targetNamespace: *namespace
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: bitwarden
-        optional: false
-  healthChecks:
-    - apiVersion: &certApiVersion cert-manager.io/v1
-      kind: &certKind Certificate
-      name: bitwarden-tls-certs
-      namespace: *namespace
-    - apiVersion: &secretApiVersion external-secrets.io/v1
-      kind: &secretKind ClusterSecretStore
-      name: bitwarden
-  healthCheckExprs:
-    - apiVersion: *certApiVersion
-      kind: *certKind
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
-    - apiVersion: *secretApiVersion
-      kind: *secretKind
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
