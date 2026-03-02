@@ -76,7 +76,7 @@ spec:
     - name: cnpg-crds
       namespace: database-system
     - name: openebs
-      namespace: openebs-system
+      namespace: storage-system
   postBuild:
     substitute:
       APP: cluster
