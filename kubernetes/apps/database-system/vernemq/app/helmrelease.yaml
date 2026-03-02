@@ -108,8 +108,6 @@ spec:
       app:
         primary: true
         type: LoadBalancer
-        ipFamilies: [IPv4, IPv6]
-        ipFamilyPolicy: PreferDualStack
         sessionAffinity: ClientIP # vernemq docs note that hopping between pods causes a significate data replication/sync cost
         externalTrafficPolicy: Local
         annotations:
